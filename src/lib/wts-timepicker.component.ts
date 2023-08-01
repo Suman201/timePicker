@@ -1,24 +1,12 @@
 
 
-
-import { trigger, transition, style, animate } from '@angular/animations';
+ 
 import { Component, EventEmitter, HostListener, Input, Output, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 
 @Component({
   selector: 'wts-timepicker',
   templateUrl: './wts-timepicker.component.html',
-  styleUrls: ['./wts-timepicker.component.scss'],
-  animations: [
-    trigger('scaleInOut', [
-      transition(':enter', [
-        style({ transform: 'scale(.8)', opacity: 0 }),
-        animate(150, style({ transform: 'scale(1)', opacity: 1 }))
-      ]),
-      transition(':leave', [
-        animate(70, style({ transform: 'scale(.9)', opacity: 0 }))
-      ])
-    ])
-  ]
+  styleUrls: ['./wts-timepicker.component.scss']
 })
 export class WtsTimepickerComponent {
 
@@ -54,18 +42,20 @@ export class WtsTimepickerComponent {
 
     setTimeout(() => {
 
-      this.useFor === 'clockface' && (this.mode = 'inlineBox')
+      this.useFor === 'clockface' && (this.time = new Date().toString(), this.mode = 'inlineBox');
+      const time = this.formatAMPM(this.time);
+      this.getCurrentTime(time)
+      this.hours = this.createHours();
+      this.minutes = this.createMinutes();
+      this.setClockTime({ seconds: 0, minutes: Number(this.minute), hours: Number(this.hour) });
 
-    const time = this.formatAMPM(this.time);
-    this.getCurrentTime(time)
-    this.hours = this.createHours();
-    this.minutes = this.createMinutes();
-    this.useFor === 'clockface' && (this.play())
-    this.setClockTime({ seconds: 0, minutes: Number(this.minute), hours: Number(this.hour) });
 
+      this.useFor === 'clockface' && (this.play())
 
       this.staticContent.clear();
-      this.staticContent.createEmbeddedView(this.template, { nMode: this.mode })
+      this.staticContent.createEmbeddedView(this.template, { nMode: this.mode });
+
+ 
     }, 100);
 
  
@@ -120,11 +110,14 @@ export class WtsTimepickerComponent {
   }
 
   protected viewModeChangeInit(e: 'hours' | 'minutes') {
+    if(this.useFor === 'clockface') return
     this.viewMode = e;
     this.setClockTime({ seconds: 0, minutes: Number(this.minute), hours: Number(this.hour) });
+
   }
 
   protected inlineTimeChange(e: Event, type: 'hour' | 'minute') {
+    if(this.useFor === 'clockface') return
     const input = e.target as HTMLInputElement;
     type === 'hour' && (this.hours = this.hours.map(t => {
       t.isActive = t.number === input.value
@@ -136,18 +129,19 @@ export class WtsTimepickerComponent {
 
     this.setClockTime({ seconds: 0, minutes: Number(this.minute), hours: Number(this.hour) });
     const time = this.format === 12 ? this.hour + ':' + this.minute + ' ' + this.meridiem : this.hour + ':' + this.minute;
-    this.timeChange.next(time)
+    this.timeChange.next(time);
   }
 
 
   protected meridiemInit(e: 'AM' | 'PM'): void {
+    if(this.useFor === 'clockface') return
     this.meridiem = e;
     const time = this.format === 12 ? this.hour + ':' + this.minute + ' ' + this.meridiem : this.hour + ':' + this.minute;
     this.timeChange.next(time)
   }
 
   protected selectTime(type: 'hour' | 'minute', e: any): void {
-
+    if(this.useFor === 'clockface') return
     type === 'minute' && (this.minutes = this.minutes.map(t => {
       t.isActive = false
       return t
@@ -166,13 +160,19 @@ export class WtsTimepickerComponent {
 
 
   private setClockTime(obj?: { seconds: number, minutes: number, hours: number }): any {
+ 
     let now = new Date(), seconds!: number, minutes!: number, hours!: number;
     if (!obj) seconds = now.getSeconds(), minutes = now.getMinutes(), hours = now.getHours();
     if (obj) seconds = obj.seconds, minutes = obj.minutes, hours = obj.hours;
 
+    
+    
     const secondsRotationDegrees = (seconds / 60) * 360;
     const minutesRotationDegrees = (minutes / 60) * 360 + (seconds / 60) * 6;
-    const hoursRotationDegrees = this.format === 12 ? (hours / 12) * 360 + (minutes / 60) * 30 : (hours % 24) * 15 + 5;
+    let hoursRotationDegrees = (hours / 12) * 360 + (0 / 60) * 30;
+    this.format === 24 && (hoursRotationDegrees = (hours % 24) * 15 + 5)
+    this.useFor === 'clockface' && (hoursRotationDegrees = (hours / 12) * 360 + (minutes / 60) * 30)
+    // const hoursRotationDegrees = this.format === 12 ? ((hours / 12) * 360 + (this.useFor === 'timepicker' ? 0 : minutes / 60) * 30) : (hours % 24) * 15 + 5;
 
 
     const secondsElement = document.getElementById('second') as HTMLElement;
@@ -194,12 +194,17 @@ export class WtsTimepickerComponent {
 
     this.minute = ("0" + minutes).slice(-2) , this.hour =("0" + hours).slice(-2);
  
-    const rotation = this.viewMode === 'hours' ? hoursRotationDegrees : minutesRotationDegrees;
-    handHourElement && (handHourElement.style.transform = `rotate(${rotation + 90}deg)`);
+
+    if(this.useFor === 'timepicker'){
+      const rotation = this.viewMode === 'hours' ? hoursRotationDegrees : minutesRotationDegrees;
+      handHourElement && (handHourElement.style.transform = `rotate(${rotation + 90}deg)`);
+    }
+   
+    
 
     secondsElement && (secondsElement.style.transform = `rotate(${secondsRotationDegrees + 90}deg)`);
     minutesElement && (minutesElement.style.transform = `rotate(${minutesRotationDegrees + 90}deg)`);
-    hoursElement && (hoursElement.style.transform = `rotate(${hoursRotationDegrees}deg)`);
+    hoursElement && (hoursElement.style.transform = `rotate(${hoursRotationDegrees + 90}deg)`);
 
   }
 

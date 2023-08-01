@@ -1,4 +1,4 @@
-import { Component, Directive, ElementRef, Input } from '@angular/core';
+import { Directive, ElementRef, Input } from '@angular/core';
 import { WtsTimepickerComponent } from './wts-timepicker.component';
 
 @Directive({

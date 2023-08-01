@@ -50,3 +50,7 @@ Selector: `wts-timepicker`
 | @Input() mode: 'modal','inlineBox','inline' |  Default 'inline' |
 | @Input() useFor: 'clockface','timepicker'  |  Default 'timepicker' |
 | @Output() timeChange: EventEmitter\<string\> | Emits time when that was set. |
+
+
+# Example
+[Click here](https://stackblitz.com/edit/stackblitz-starters-gzdgs9)

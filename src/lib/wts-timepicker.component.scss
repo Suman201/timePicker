@@ -26,6 +26,37 @@
     display: flex;
   }
 
+  &.modal{
+    animation-name: scaleInOut;
+    animation-duration: 150ms;
+  }
+
+  &.clockface{
+    .header  {
+      .meridiem{
+        cursor: default !important;
+      }
+    } 
+    .face {
+      .digits {
+        span {
+          cursor: default !important;
+          &.active {
+            color: var(--dialDigitsColor);
+            background-color: transparent;
+         
+          }
+        }
+      }
+    }
+  }
+
+
+  @keyframes scaleInOut {
+    from {opacity: 0; transform:scale(.8);}
+    to {opacity: 1; transform:scale(1);}
+  }
+
   margin: auto;
   padding-bottom: 15px;
   border-radius: 15px 15px 0 0;

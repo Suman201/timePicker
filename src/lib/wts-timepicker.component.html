@@ -2,7 +2,7 @@
 <ng-template #template let-mode="nMode">
  
   <div class="overlay" (click)="destroy(true)" *ngIf="mode === 'modal'"  ></div>
-  <div class="____wts_clock {{mode}}" [@scaleInOut] [@.disabled]="mode !== 'modal'">
+  <div class="____wts_clock {{mode}} {{useFor}}" >
 
     <ng-container *ngIf="mode === 'inlineBox' || mode === 'modal' ">
       <div class="header">
