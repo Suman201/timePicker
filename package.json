@@ -1,6 +1,6 @@
 {
   "name": "wts-timepicker",
-  "version": "2.0.1",
+  "version": "2.0.3",
   "keywords": [
     "angular",
     "angular 2",
@@ -20,9 +20,7 @@
     "material design",
     "timepicker",
     "material timepicker",
-    "ngx timepicker",
-    "angular timepicker",
-    "ng timepicker"
+    "angular timepicker"
   ],
   "license": "MIT",
   "author": "Suman Mandal",
