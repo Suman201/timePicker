@@ -1,0 +1,113 @@
+ 
+<ng-template #template let-mode="nMode">
+ 
+  <div class="overlay" (click)="destroy(true)" *ngIf="mode === 'modal'"  ></div>
+  <div class="____wts_clock {{mode}}" [@scaleInOut] [@.disabled]="mode !== 'modal'">
+
+    <ng-container *ngIf="mode === 'inlineBox' || mode === 'modal' ">
+      <div class="header">
+        <div class="box" (click)="viewModeChangeInit('hours')">
+          <input [class.active]="viewMode === 'hours'" (change)="inlineTimeChange($event, 'hour')" type="text"
+               [(ngModel)]="hour" maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+        </div>
+        <div class="box">:</div>
+        <div class="box" (click)="viewModeChangeInit('minutes')">
+          <input [class.active]="viewMode === 'minutes'" (change)="inlineTimeChange($event, 'minute')" type="text"
+           [(ngModel)]="minute" maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+        </div>
+
+        <ng-container *ngIf="format === 12">
+          <div class="meridiem" [class.active]="meridiem === 'AM'" (click)="meridiemInit('AM')">AM</div>
+          <div class="meridiem" [class.active]="meridiem === 'PM'" (click)="meridiemInit('PM')">PM</div>
+        </ng-container>
+      </div>
+
+
+      <div class="face">
+ 
+        <ng-container *ngIf="viewMode === 'hours'">
+
+          <div class="digits" *ngFor="let item of hours"
+            [ngStyle]="{  'margin-left': 100/format + '%', width: 100/format + '%', transform: 'rotateZ('+item.angel+'deg) translateX(-50%)'}">
+            <span [class.active]="item.isActive" (click)="selectTime('hour', item)"
+              [ngStyle]="{transform: 'rotateZ(-'+item.angel+'deg)'}">{{item.number}}</span>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="viewMode === 'minutes'">
+          <div class="digits" *ngFor="let item of minutes"
+            [ngStyle]="{  'margin-left': 100/format + '%', width: 100/format + '%', transform: 'rotateZ('+item.angel+'deg) translateX(-50%)'}">
+            <span (click)="selectTime('minute', item)" [ngStyle]="{transform: 'rotateZ(-'+item.angel+'deg)'}">
+              {{item.isVisible ? item.number : ''}}
+            </span>
+          </div>
+
+        </ng-container>
+
+        <div class="center"></div>
+        <ng-container *ngIf="useFor === 'clockface' ">
+          <div class="hour" id="hour"></div>
+          <div class="minute" id="minute"></div>
+          <div class="second" id="second"></div>
+        </ng-container>
+        <ng-container *ngIf="useFor === 'timepicker' ">
+          <div class="hand {{viewMode}}" id="handHour"></div>
+        </ng-container>
+      </div>
+
+      <div class="bottom" *ngIf="actionEnabled">
+        <button type="button" (click)="destroy(false)" class="btnCancel">{{cancelBtnLbl}}</button>
+        <button type="button" (click)="destroy(true)"  class="btnOk">{{confirmBtnLbl}}</button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="mode === 'inline'">
+      <div class="picker_controls">
+        <div class="hours">
+          <div class="inputBox">
+            <input maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+              (input)="modelChange('hour')" [(ngModel)]="hour">
+            <div class="arrow_controls">
+              <span class="arrow_up" (click)="arrowAction('hour', 'increment')"> ▲ </span>
+              <span class="arrow_down" (click)="arrowAction('hour', 'deccrement')"> ▼ </span>
+            </div>
+          </div>
+        </div>
+        <div class="minutes">
+          <div class="inputBox">
+            <input maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57' [(ngModel)]="minute"
+              (input)="modelChange('minute')">
+            <div class="arrow_controls">
+              <span class="arrow_up" (click)="arrowAction('minute', 'increment')"> ▲ </span>
+              <span class="arrow_down" (click)="arrowAction('minute', 'deccrement')"> ▼ </span>
+            </div>
+          </div>
+        </div>
+        <div class="meridiem" *ngIf="format === 12">
+          <div class="inputBox">
+            <select [(ngModel)]="meridiem">
+              <option value="AM">AM</option>
+              <option value="PM">PM</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="toggler" (click)="open()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2C17.52 2 22 6.48 22 12Z"
+              stroke="#333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M15.7099 15.18L12.6099 13.33C12.0699 13.01 11.6299 12.24 11.6299 11.61V7.51001" stroke="#333"
+              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+
+        </div>
+ 
+      </div>
+    </ng-container>
+
+  </div>
+
+</ng-template>
+
+<ng-container #staticContent ></ng-container>
+<ng-container #modalContent></ng-container>

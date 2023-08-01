@@ -1,0 +1,303 @@
+* {
+  box-sizing: border-box;
+}
+
+.____wts_clock {
+
+  --headerBackgroundColor: #2741b3;
+  --hourActiveBackgroundColor: #2741b3;
+  --handBackgroundColor: #2741b3;
+  --dialBorderColor: #2741b3;
+  --dialBackgroundColor: #fff;
+  --dialDigitsColor: #4e4e4e;
+  --dialBorderWith: 2px;
+  --meridiemColor: #8da1f7;
+  --meridiemActiveColor: #fff9f9;
+  --headerDigitsColor: #8da1f7;
+  --headerActiveDigitsColor: #fff9f9;
+  --cancelBtnBackgroundColor: #2741b3;
+  --cancelBtnTextColor: #fff9f9;
+  --cancelBtnBorderColor: #2741b3;
+  --okBtnBackgroundColor: #fff9f9;
+  --okBtnTextColor: #2741b3;
+  --okBtnBorderColor: #2741b3;
+
+  &.inline{
+    display: flex;
+  }
+
+  margin: auto;
+  padding-bottom: 15px;
+  border-radius: 15px 15px 0 0;
+  margin: auto;
+
+ &:not(.inline){
+  max-width: 320px;
+ }
+
+
+  .face {
+    width: 300px;
+    height: 300px;
+    border: solid var(--dialBorderColor) var(--dialBorderWith);
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    background-color: var(--dialBackgroundColor);
+    margin-top: 10px;
+  }
+
+  .center {
+    width: 10px;
+    height: 10px;
+    border: solid;
+    border-radius: 50%;
+    margin: auto;
+  }
+
+  .digits {
+    height: 50%;
+    position: absolute;
+    text-align: center;
+    transform-origin: 0px 100%;
+
+    span {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--dialDigitsColor);
+
+      &:not(.actuve) {
+        cursor: pointer;
+      }
+
+      user-select: none;
+
+      &.active {
+        pointer-events: none;
+        background-color: var(--hourActiveBackgroundColor);
+        border-radius: 50%;
+        color: #fff;
+      }
+    }
+
+  }
+
+  .second,
+  .hand {
+    margin: auto;
+    height: 2px;
+    width: calc(50% - 30px);
+    position: absolute;
+    background: var(--handBackgroundColor);
+    top: 50%;
+    border-radius: 100px;
+    transform-origin: 100%;
+    left: 30px;
+
+    &.minutes {
+      &::before {
+        content: '';
+        width: 5px;
+        height: 5px;
+        border: solid;
+        position: absolute;
+        top: 0px;
+        bottom: 0;
+        margin: auto;
+        border-radius: 50%;
+        margin-left: -7px;
+      }
+    }
+  }
+
+  .minute {
+    margin: auto;
+    height: 4px;
+    width: calc(50% - 75px);
+    position: absolute;
+    background: #b70606;
+    top: 50%;
+    border-radius: 100px;
+    transform-origin: 100%;
+    left: 75px
+  }
+
+  .hour {
+    margin: auto;
+    height: 6px;
+    width: calc(50% - 100px);
+    position: absolute;
+    background: #4f0303;
+    top: 50%;
+    border-radius: 100px;
+    transform-origin: 100%;
+    left: 100px
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  align-items: center;
+  background: var(--headerBackgroundColor);
+  border-radius: 5px;
+  padding: 7px;
+
+  .meridiem {
+    text-transform: uppercase;
+    user-select: none;
+    cursor: pointer;
+    font-weight: 500;
+    padding-left: 15px;
+    color: var(--meridiemColor);
+
+    &.active {
+      color: var(--meridiemActiveColor);
+    }
+  }
+
+  .box {
+    font-size: 40px;
+    cursor: pointer;
+    color: var(--headerDigitsColor);
+
+    input {
+      width: 30px;
+      font-size: 20px;
+      width: 40px;
+      font-size: 30px;
+      border: none;
+      background: transparent;
+      outline: none;
+      color: var(--headerDigitsColor);
+
+      &.active {
+        color: var(--headerActiveDigitsColor);
+      }
+    }
+  }
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  justify-content: center;
+
+  button {
+    padding: 0 10px;
+    width: 80px;
+    height: 40px;
+    border: solid;
+    border-radius: 4px;
+    margin: 0 5px;
+    cursor: pointer;
+    letter-spacing: .6px;
+
+    &.btnCancel {
+      background: var(--cancelBtnBackgroundColor);
+      color: var(--cancelBtnTextColor);
+      border-color: var(--cancelBtnBorderColor);
+
+      &:hover {
+        opacity: .7;
+      }
+    }
+
+    &.btnOk {
+      background: var(--okBtnBackgroundColor);
+      color: var(--okBtnTextColor);
+      border-color: var(--okBtnBorderColor);
+
+      &:hover {
+        opacity: .7;
+      }
+    }
+  }
+}
+
+.picker_controls {
+  display: flex;
+  border: solid 1px;
+  border-radius: 4px;
+  width: auto;
+  margin: auto;
+  .toggler{
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    cursor: pointer;
+    user-select: none;
+    width: 45px;
+  }
+  .minutes{
+    width: 80px;
+  }
+  .hours {
+    width: 80px;
+    .inputBox {
+      input{
+        border-radius: 4px 0 0 4px;
+      }
+    }
+  }
+  .inputBox {
+    position: relative;
+ 
+    input, select {
+      height: 36px;
+      font-size: 16px;
+      width: 80px;
+      border: none;
+      border-right: solid 1px;
+      text-align: center;
+      outline: none;
+    }
+
+    .arrow_controls {
+      position: absolute;
+      top: 0;
+      right: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      span{
+        cursor: pointer;
+        user-select: none;
+      }
+    }
+  }
+}
+.overlay{
+  background: rgba(0,0,0,.2);
+  width: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+}
+.____wts_clock.modal{
+  background: #fff;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,.4);
+  position: fixed;
+  left: 0;
+  margin: auto;
+  z-index: 2;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 450px;
+  border-radius: 6px;
+}
