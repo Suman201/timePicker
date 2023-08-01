@@ -1,6 +1,31 @@
 {
   "name": "wts-timepicker",
-  "version": "2.0.0",
+  "version": "2.0.1",
+  "keywords": [
+    "angular",
+    "angular 2",
+    "angular 4",
+    "angular 5",
+    "angular 6",
+    "angular 7",
+    "angular 8",
+    "angular 9",
+    "angular 10",
+    "angular 11",
+    "angular 12",
+    "angular 13",
+    "angular 14",
+    "angular 15",
+    "angular 16",
+    "material design",
+    "timepicker",
+    "material timepicker",
+    "ngx timepicker",
+    "angular timepicker",
+    "ng timepicker"
+  ],
+  "license": "MIT",
+  "author": "Suman Mandal",
   "peerDependencies": {
     "@angular/common": "^16.1.0",
     "@angular/core": "^16.1.0",
@@ -13,5 +38,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Suman201/timepicker"
+  },
+  "bugs": {
+    "url": "https://github.com/Suman201/timepicker/issues"
   }
 }
