@@ -54,6 +54,7 @@ export class WtsTimepickerComponent {
 
     setTimeout(() => {
 
+      this.useFor === 'clockface' && (this.mode = 'inlineBox')
 
     const time = this.formatAMPM(this.time);
     this.getCurrentTime(time)
@@ -80,6 +81,7 @@ export class WtsTimepickerComponent {
 
     this.viewMode = 'hours';
     this.setClockTime({ seconds: 0, minutes: Number(this.minute), hours: Number(this.hour) });
+
     setTimeout(() => {
       this.modalContent.createEmbeddedView(this.template, { nMode: 'modal' })
     }, 150);
@@ -179,6 +181,7 @@ export class WtsTimepickerComponent {
     const handHourElement = document.getElementById('handHour') as HTMLElement;
 
 
+  
 
 
     if ((!secondsElement || !minutesElement || !hoursElement) && this.useFor === 'clockface') return setTimeout(() => {
@@ -189,6 +192,8 @@ export class WtsTimepickerComponent {
       return this.setClockTime(obj)
     }, 100);
 
+    this.minute = ("0" + minutes).slice(-2) , this.hour =("0" + hours).slice(-2);
+ 
     const rotation = this.viewMode === 'hours' ? hoursRotationDegrees : minutesRotationDegrees;
     handHourElement && (handHourElement.style.transform = `rotate(${rotation + 90}deg)`);
 

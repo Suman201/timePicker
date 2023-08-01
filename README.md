@@ -31,6 +31,11 @@ Finally connect the timepicker to an input via a template property:
 <wts-timepicker #picker mode="inlineBox"></wts-timepicker>
 ```
 
+**OR**
+```
+<wts-timepicker #picker useFor="clockface"></wts-timepicker>
+```
+
 Component responsible for visualisation the timepicker
 
 Selector: `wts-timepicker`
@@ -43,4 +48,5 @@ Selector: `wts-timepicker`
 | @Input() format: 12 or 24 |  Default 12 |
 | @Input() time: Date/string |  Default new Date() string |
 | @Input() mode: 'modal','inlineBox','inline' |  Default 'inline' |
+| @Input() useFor: 'clockface','timepicker'  |  Default 'timepicker' |
 | @Output() timeChange: EventEmitter\<string\> | Emits time when that was set. |

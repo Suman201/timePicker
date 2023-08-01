@@ -8,12 +8,12 @@
       <div class="header">
         <div class="box" (click)="viewModeChangeInit('hours')">
           <input [class.active]="viewMode === 'hours'" (change)="inlineTimeChange($event, 'hour')" type="text"
-               [(ngModel)]="hour" maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+               [(ngModel)]="hour" [ngModelOptions]="{standalone: true}" maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
         </div>
         <div class="box">:</div>
         <div class="box" (click)="viewModeChangeInit('minutes')">
           <input [class.active]="viewMode === 'minutes'" (change)="inlineTimeChange($event, 'minute')" type="text"
-           [(ngModel)]="minute" maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+           [(ngModel)]="minute" [ngModelOptions]="{standalone: true}" maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
         </div>
 
         <ng-container *ngIf="format === 12">
@@ -66,7 +66,7 @@
         <div class="hours">
           <div class="inputBox">
             <input maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-              (input)="modelChange('hour')" [(ngModel)]="hour">
+              (input)="modelChange('hour')" [(ngModel)]="hour" [ngModelOptions]="{standalone: true}">
             <div class="arrow_controls">
               <span class="arrow_up" (click)="arrowAction('hour', 'increment')"> ▲ </span>
               <span class="arrow_down" (click)="arrowAction('hour', 'deccrement')"> ▼ </span>
@@ -76,7 +76,7 @@
         <div class="minutes">
           <div class="inputBox">
             <input maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57' [(ngModel)]="minute"
-              (input)="modelChange('minute')">
+              (input)="modelChange('minute')" [ngModelOptions]="{standalone: true}">
             <div class="arrow_controls">
               <span class="arrow_up" (click)="arrowAction('minute', 'increment')"> ▲ </span>
               <span class="arrow_down" (click)="arrowAction('minute', 'deccrement')"> ▼ </span>
