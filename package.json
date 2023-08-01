@@ -1,6 +1,6 @@
 {
   "name": "wts-timepicker",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "keywords": [
     "angular",
     "angular 2",
@@ -26,8 +26,7 @@
   "author": "Suman Mandal",
   "peerDependencies": {
     "@angular/common": "^16.1.0",
-    "@angular/core": "^16.1.0",
-    "@angular/material": "^16.1.5"
+    "@angular/core": "^16.1.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
