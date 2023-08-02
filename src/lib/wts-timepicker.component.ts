@@ -20,9 +20,9 @@ export class WtsTimepickerComponent {
   @Input() mode: 'inlineBox' | 'modal' | 'inline' | 'none' = 'inline';
   @Input() useFor: 'clockface' | 'timepicker' = 'timepicker';
 
-  @Input() protected confirmBtnLbl: string = 'Ok';
-  @Input() protected cancelBtnLbl: string = 'Cancel';
-  @Input() protected escapeToClose: boolean = true;
+  @Input() confirmBtnLbl: string = 'Ok';
+  @Input() cancelBtnLbl: string = 'Cancel';
+  @Input() escapeToClose: boolean = true;
 
   protected viewMode: 'hours' | 'minutes' = 'hours'
   protected minutes!: Array<any>;

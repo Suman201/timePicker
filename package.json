@@ -1,6 +1,6 @@
 {
   "name": "wts-timepicker",
-  "version": "2.1.9",
+  "version": "2.2.0",
   "keywords": [
     "angular",
     "angular 2",
@@ -32,6 +32,9 @@
     "tslib": "^2.3.0"
   },
   "sideEffects": false,
+  "publishConfig": {
+    "registry": "https://www.npmjs.com/package/wts-timepicker"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Suman201/timepicker"

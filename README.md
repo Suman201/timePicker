@@ -58,10 +58,11 @@ Selector: `wts-timepicker`
 | @Input() format: 12 or 24                    | Default 12                    |
 | @Input() time: Date/string                   | Default new Date() string     |
 | @Input() mode: 'modal','inlineBox','inline'  | Default 'inline'              |
+| @Input() confirmBtnLbl: string               | Default 'Ok'                  |
+| @Input() cancelBtnLbl: string                | Default 'Cancel'              |
+| @Input() escapeToClose: boolean              | Default true                  |
 | @Input() useFor: 'clockface','timepicker'    | Default 'timepicker'          |
 | @Output() timeChange: EventEmitter\<string\> | Emits time when that was set. |
-
-
 
 **CSS Customization**
 
@@ -88,7 +89,6 @@ on style.scss
   --okBtnBorderColor: #2741b3;
 }
 ```
-
 
 # Example
 
