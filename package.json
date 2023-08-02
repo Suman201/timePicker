@@ -33,7 +33,7 @@
   },
   "sideEffects": false,
   "publishConfig": {
-    "registry": "https://www.npmjs.com/package/wts-timepicker"
+    "registry": "https://npm.pkg.github.com"
   },
   "repository": {
     "type": "git",
