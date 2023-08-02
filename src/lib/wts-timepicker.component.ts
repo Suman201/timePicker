@@ -68,13 +68,13 @@ export class WtsTimepickerComponent {
   }
 
   open(): void {
-
-    this.viewMode = 'hours';
-    this.setClockTime({ seconds: 0, minutes: Number(this.minute), hours: Number(this.hour) });
-
+    this.modalContent.clear();
+    this.modalContent.detach();
+    this.modalContent.createEmbeddedView(this.template, { nMode: 'modal' });
     setTimeout(() => {
-      this.modalContent.createEmbeddedView(this.template, { nMode: 'modal' })
-    }, 150);
+      this.viewModeChangeInit('hours');
+    }, 100);
+ 
   }
 
   @HostListener('document:keydown.escape', ['$event']) private onKeydownHandler(event: KeyboardEvent) {
@@ -178,10 +178,12 @@ export class WtsTimepickerComponent {
     const secondsElement = document.getElementById('second') as HTMLElement;
     const minutesElement = document.getElementById('minute') as HTMLElement;
     const hoursElement = document.getElementById('hour') as HTMLElement;
+    
     const handHourElement = document.getElementById('handHour') as HTMLElement;
 
 
   
+
 
 
     if ((!secondsElement || !minutesElement || !hoursElement) && this.useFor === 'clockface') return setTimeout(() => {
@@ -195,16 +197,20 @@ export class WtsTimepickerComponent {
     this.minute = ("0" + minutes).slice(-2) , this.hour =("0" + hours).slice(-2);
  
 
-    if(this.useFor === 'timepicker'){
+    if(this.useFor === 'timepicker') {
+      
       const rotation = this.viewMode === 'hours' ? hoursRotationDegrees : minutesRotationDegrees;
-      handHourElement && (handHourElement.style.transform = `rotate(${rotation + 90}deg)`);
+      handHourElement && ( handHourElement.style.transform = `rotate(${rotation + 90}deg)`);
+
+    } else {
+      secondsElement && (secondsElement.style.transform = `rotate(${secondsRotationDegrees + 90}deg)`);
+      minutesElement && (minutesElement.style.transform = `rotate(${minutesRotationDegrees + 90}deg)`);
+      hoursElement && (hoursElement.style.transform = `rotate(${hoursRotationDegrees + 90}deg)`);
     }
    
     
 
-    secondsElement && (secondsElement.style.transform = `rotate(${secondsRotationDegrees + 90}deg)`);
-    minutesElement && (minutesElement.style.transform = `rotate(${minutesRotationDegrees + 90}deg)`);
-    hoursElement && (hoursElement.style.transform = `rotate(${hoursRotationDegrees + 90}deg)`);
+
 
   }
 

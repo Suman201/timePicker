@@ -1,9 +1,5 @@
-* {
-  box-sizing: border-box;
-}
-
-.____wts_clock {
-
+ 
+ :host{
   --headerBackgroundColor: #2741b3;
   --hourActiveBackgroundColor: #2741b3;
   --handBackgroundColor: #2741b3;
@@ -21,6 +17,11 @@
   --okBtnBackgroundColor: #fff9f9;
   --okBtnTextColor: #2741b3;
   --okBtnBorderColor: #2741b3;
+ }
+
+.____wts_clock {
+
+
 
   &.inline{
     display: flex;
